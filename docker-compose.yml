@@ -5,7 +5,7 @@ volumes:
 
 
 services:
-  database:
+  mysqldb:
     image: mysql:8.0.22
     ports:
       - "1336:3306"
@@ -15,14 +15,14 @@ services:
     restart: always
 
     environment:
-      MYSQL_ROOT_PASSWORD: sa
+      MYSQL_PASSWORD: sa
   #Api  Service
   api:
-    image: amnashahid/bedockerhub
+    image: amnashahid/devops-be
     build:
       context: .
     depends_on:
-      - database
+      - mysqldb
     ports:
       - "5000:80"
     restart: always
@@ -30,8 +30,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
   #frontend
   app:
-    container_name: app-dev
-    image: app-dev
+    container_name: frontend-dev
     build:
       context: .
       dockerfile: Dockerfile
