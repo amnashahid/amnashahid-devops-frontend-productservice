@@ -5,24 +5,21 @@ volumes:
 
 
 services:
-  mysqldb:
-    image: mysql:8.0.22
-    ports:
-      - "1336:3306"
-    volumes:
-      - datafiles:/var/lib/mysql
-      - "~/sql-scripts/setup.sql:/docker-entrypoint-initdb.d/1.sql"
-    restart: always
+  #mysqldb:
+  # image: mysql:8.0.22
+  # ports:
+  #   - "1336:3306"
+  # volumes:
+  #   - datafiles:/var/lib/mysql
+  #   - "~/sql-scripts/setup.sql:/docker-entrypoint-initdb.d/1.sql"
+  # restart: always
 
-    environment:
-      MYSQL_PASSWORD: sa
+  # environment:
+  #   MYSQL_PASSWORD: sa
   #Api  Service
   api:
-    image: amnashahid/devops-be
-    build:
-      context: .
-    depends_on:
-      - mysqldb
+    container_name: backend-dev1
+    image: amnashahid/aspnet-be-img-22
     ports:
       - "5000:80"
     restart: always
